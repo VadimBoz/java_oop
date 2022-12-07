@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class L4 {
@@ -8,7 +9,7 @@ public class L4 {
     static ArrayList<String> v_name = new ArrayList<>();
     static ArrayList<Integer> age = new ArrayList<>();
     static ArrayList<String> gender = new ArrayList<>();
-    static ArrayList<Integer> index = new ArrayList<>();
+    static LinkedList<Integer> index = new LinkedList<>();
 
     public static String readStr (String message){
         String input = null;
@@ -38,31 +39,54 @@ public class L4 {
         age.add(age_inp);
     }
 
-    private static void kinda_sort(ArrayList<Integer> a, ArrayList<Integer> ind){
-        int min = 0;
-        for (int i = 0; i < a.toArray().length; i++) {
-            if (a.get(min) > a.get(ind.get(i))){
-                int temp = min;
-                ind.set(min, ind.get(i));
-                ind.set(i, temp);
-
-
+    private static void kinda_sort(ArrayList<Integer> a, LinkedList<Integer> ind){
+        int cnt = a.size()-1;
+        while(cnt>-1){
+            int max = a.get(ind.get(cnt));
+            int index = cnt;
+            for (int i = 0; i < cnt; i++) {
+                if (max < a.get(ind.get(i))) {
+                    max = a.get(ind.get(i));
+                    index = i;
+                }
             }
+            int tmp = ind.get(cnt);
+            ind.set(cnt, ind.get(index));
+            ind.set(index,tmp);
+            cnt--;
         }
-    }
+        }
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
         
         int count = Integer.parseInt(readStr("Сколько записей вы хотите сделать? "));
         for (int i = 0; i < count; i++) {
             reader();
             index.add(i);
         }
+
         index.forEach(i -> print_record(i, surname, name, v_name, gender, age));
         kinda_sort(age, index);
         System.out.println();
-        index.forEach(i-> print_record(i, surname, name, v_name, gender, age));
+        index.forEach(i->
+                System.out.println(surname.get(i)+" - "+name.get(i)+" - "+v_name.get(i)+" - "+gender.get(i)+" - "+age.get(i)));
+        System.out.println();
 
+        /*----------HOMEWORK------------*/
+
+        surname = sort4real(index,surname);
+        name = sort4real(index, name);
+        v_name = sort4real(index, v_name);
+        gender = sort4real(index, gender);
+        age = sort4real(index, age);
+        for (int i = 0; i < name.size(); i++)
+            print_record(i, surname, name, v_name, gender, age);
     }
 
+    private static ArrayList sort4real(LinkedList<Integer> order, ArrayList data) {
+        ArrayList temp = new ArrayList();
+        for (int i = 0; i < data.size(); i++)
+            temp.add(data.get(order.get(i)));
+        return temp;
+    }
 }
