@@ -6,13 +6,10 @@ import java.util.function.Function;
 
 public class VendingMachine {
     private List<Product> prod_list;
-
     private static List<Product> DEFAULT = new ArrayList<>(Arrays.asList(new Product("rock", 1)));
-
     public VendingMachine(List<Product> prod_list) {
         this.prod_list = prod_list;
     }
-
     public VendingMachine() {
         this(DEFAULT); // вызов конструктора
     }
@@ -26,11 +23,9 @@ public class VendingMachine {
     public List<Product> findByName(String name) {
         return finder(p->p.getName().equals(name));
     }
-
     public List<Product> findByPrice(double price) {
         return finder(p->p.getPrice()==price);
     }
-
     public List<Product> findByPriceRange(double p1, double p2) {
         return finder(p->p.getPrice()<p2 && p.getPrice()>p1);
     }

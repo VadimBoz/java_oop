@@ -14,6 +14,6 @@ public class Soda extends Product{
     }
 
     public String toString(){
-        return String.format("%s - %s", super.toString(), flavor);
+        return String.format("%s  flavor: %s", super.toString(), flavor);
     }
 }

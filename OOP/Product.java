@@ -8,24 +8,11 @@ public class Product {
         this.setPrice(price);
     }
 
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
 
-    public String getName() {
-        return name;
-    }
+    public double getPrice() {return price;}
+    public void setPrice(double price) {this.price = price;}
 
-    private void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String toString(){
-        return String.format("%s - %f",name, price);
-    }
+    public String toString() {return String.format("\nname: %s  price : %.2f  ",name, price);}
 }
